@@ -1,22 +1,18 @@
 #!/bin/bash
 if [[ $# != 1 ]]; then
-	echo "Numero de argumentos incorrecto, debe usar solo uno"
 	exit 1
 fi
 
-mkdir itmp
+# Se crea una lista de nombres a partir de el archivo CSV provisto.
+NOMBRES=$(sort -R personas.csv | head -n $1 | cut -d "," -f 1 | tr " " _)
 
-sort -R personas.csv | cut -d "," -f 1 | head -n $1 > nombres
+# Se crea un directorio temporal para guardar las imágenes.
+mkdir tmp 2> /dev/null
 
-#for $(seq $1); do
-
-#wget -P itmp URL_archivo
-#sleep 5
-
-#done
-
-for file in imagen*; do
-	read line
-	mv "${file}" "${line}"
-done < nombres
-
+CONT=0
+for nombre in $NOMBRES; do
+	wget -O tmp/$nombre.jpg https://thispersondoesnotexist.com/ 2> /dev/null
+	CONT=$((CONT + 1))
+	echo "Generando imágenes... ($CONT/$1)"
+	sleep 1
+done

@@ -2,7 +2,7 @@ FROM ubuntu
 MAINTAINER Marco Ippolito, Román Vázquez Ruiz Díaz
 
 # Instalación de paquetes necesarios
-RUN apt-get update && apt-get install -y wget imagemagick
+RUN apt-get update && apt-get install -y wget gzip imagemagick
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 

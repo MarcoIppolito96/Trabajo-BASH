@@ -9,24 +9,43 @@ menu() {
     echo ""
 }
 
-menu
-read -p "Ingrese una opción: " OPCION
-while [[ $OPCION < 0 ]] || [[ $OPCION > 3 ]]; do
-    menu
-    read -p "Opción incorrecta. Intente nuevamente: " OPCION
-done
-
-case $OPCION in
+opciones() {
+    case $1 in
     1)
-    ./generar.sh
+        clear
+        read -p "Ingrese la cantidad de imágenes a generar: " CANT
+        while [[ $CANT < 1 ]]; do
+            clear
+            read -p "Cantidad incorrecta. Intente nuevamente: " CANT
+        done
+        ./generar.sh $CANT
+        menu
+        leer_opcion
     ;;
     2)
-    ./descargar.sh
+        ./descargar.sh
     ;;
     3)
-    ./descomprimir.sh
+        ./descomprimir.sh
     ;;
     0)
-    exit 0
+        exit 0
     ;;
-esac
+    esac
+}
+
+leer_opcion() {
+    read -p "Ingrese una opción: " OPCION
+    while [[ $OPCION < 0 ]] || [[ $OPCION > 3 ]]; do
+        menu
+        read -p "Opción incorrecta. Intente nuevamente: " OPCION
+    done
+    opciones $OPCION
+}
+
+main() {
+    menu
+    leer_opcion
+}
+
+main
