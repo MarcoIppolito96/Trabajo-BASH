@@ -4,11 +4,11 @@ if [[ $# != 1 ]]; then
 fi
 
 # Constantes
-ARCHIVO_NOMBRES="personas.csv"
+ARCHIVO_NOMBRES="nombres.csv"
 DIR_TEMPORAL=".tmp"
-LINK=https://thispersondoesnotexist.com/
+LINK="https://thispersondoesnotexist.com/"
 FORMATO="jpg"
-ARCHIVO_SALIDA=imagenes.tar.gz
+ARCHIVO_SALIDA="imagenes.tar.gz"
 
 # Se crea una lista de nombres a partir de el archivo CSV provisto.
 NOMBRES=$(sort -R $ARCHIVO_NOMBRES | head -n $1 | cut -d "," -f 1 | cut -d " " -f 1)
@@ -34,7 +34,7 @@ tar -C $DIR_TEMPORAL -czf $ARCHIVO_SALIDA ./
 echo $(sha256sum $ARCHIVO_SALIDA) > $ARCHIVO_SALIDA.sha256
 
 # Se borra el directorio temporal
-rm -r .tmp
+rm -r $DIR_TEMPORAL
 
 echo "Imágenes generadas y comprimidas en $ARCHIVO_SALIDA"
 read -p "Presione cualquier tecla para continuar..."
