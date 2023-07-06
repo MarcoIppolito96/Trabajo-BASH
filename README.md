@@ -1,4 +1,4 @@
-# Entorno de programación - Trabajo práctico
+# Trabajo práctico - Entorno de programación - TUIA
 
 Procesador de imágenes
 
@@ -6,6 +6,8 @@ Procesador de imágenes
 
 - Marcos Ippolito
 - Román Vazquez Ruiz Díaz
+
+---
 
 ### Dependencias
 
@@ -15,16 +17,17 @@ Procesador de imágenes
 
 Clonar el repositorio:
 
-```shell
+```console
 $ git clone https://github.com/romanvrd/tp-entorno
 $ cd tp-entorno
 ```
 
 ### Uso
 
-Construir y correr la imagen de Docker:
+Construir y ejecutar la imagen de Docker:
 
-```shell
+```console
 # docker build -t tp-entorno .
 # docker run -it -v ./:/opt/procesador tp-entorno
 ```
+Opcionalmente ejecutar con la opción `--rm` para eliminar automáticamente el contenedor luego de haberlo ejecutado.
