@@ -1,5 +1,5 @@
 #!/bin/bash
-menu() {
+imprimir_menu() {
     clear
     echo "# --------- Procesador de imágenes --------- #"
     echo "1) Generar imágenes."
@@ -13,13 +13,13 @@ opciones() {
     case $1 in
     1)
         clear
-        read -p "Ingrese la cantidad de imágenes a generar: " CANT
-        while [[ $CANT < 1 ]]; do
+        read -p "Ingrese la cantidad de imágenes a generar. Ingrese 0 para volver al menú: " CANT
+        while ! [[ $CANT =~ ^[0-9]+$ ]]; do
             clear
             read -p "Cantidad incorrecta. Intente nuevamente: " CANT
         done
         ./generar.sh $CANT
-        menu
+        imprimir_menu
         leer_opcion
     ;;
     2)
@@ -36,15 +36,15 @@ opciones() {
 
 leer_opcion() {
     read -p "Ingrese una opción: " OPCION
-    while [[ $OPCION < 0 ]] || [[ $OPCION > 3 ]]; do
-        menu
+    while ! [[ $OPCION =~ ^[0-3]$ ]]; do
+        imprimir_menu
         read -p "Opción incorrecta. Intente nuevamente: " OPCION
     done
     opciones $OPCION
 }
 
 main() {
-    menu
+    imprimir_menu
     leer_opcion
 }
 
