@@ -1,11 +1,12 @@
 #!/bin/bash
 imprimir_menu() {
     clear
-    echo "# --------- Procesador de imágenes --------- #"
-    echo "1) Generar imágenes."
-    echo "2) Descargar imágenes."
-    echo "3) Descomprimir."
-    echo "0) Salir."
+    echo "| = = = = = | Procesador de imágenes | = = = = = |"
+    echo ""
+    echo "1) Generar imágenes"
+    echo "2) Descargar imágenes"
+    echo "3) Descomprimir, procesar y comprimir las imágenes"
+    echo "0) Salir"
     echo ""
 }
 
@@ -19,14 +20,17 @@ opciones() {
             read -p "Cantidad incorrecta. Intente nuevamente: " CANT
         done
         ./generar.sh $CANT
-        imprimir_menu
-        leer_opcion
+        main
     ;;
     2)
         ./descargar.sh
+        main
     ;;
     3)
         ./descomprimir.sh
+        ./procesar.sh
+        ./comprimir.sh
+        main
     ;;
     0)
         exit 0
