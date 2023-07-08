@@ -10,9 +10,11 @@ fi
 # Constantes
 ARCHIVO_NOMBRES="nombres.csv"
 LINK="https://thispersondoesnotexist.com/"
-FORMATO="jpg"
 
-# Se crea una lista de nombres a partir de el archivo CSV provisto.
+# Se determina el formato de las imágenes a descargar.
+FORMATO=$(wget --spider $LINK 2>&1 | grep Length: | tr -s "[:punct:]" " " | cut -d " " -f 5)
+
+# Se crea una lista de nombres aleatorios a partir de el archivo CSV provisto.
 NOMBRES=$(sort -R $ARCHIVO_NOMBRES | head -n $1 | cut -d "," -f 1 | cut -d " " -f 1)
 
 # Se borra el directorio temporal en caso de que esté presente.
@@ -41,5 +43,5 @@ echo $(sha256sum $ARCHIVO_SALIDA) > $ARCHIVO_SALIDA.sha256
 # Se borra el directorio temporal.
 rm -r $DIR_TEMPORAL
 
-echo "Imágenes generadas y comprimidas en $ARCHIVO_SALIDA"
+echo "Imágenes generadas y comprimidas en '$ARCHIVO_SALIDA'"
 read -p "Presione Enter para continuar..."
