@@ -18,7 +18,7 @@ FORMATO=$(wget --spider $LINK 2>&1 | grep Length: | tr -s "[:punct:]" " " | cut 
 NOMBRES=$(sort -R $ARCHIVO_NOMBRES | head -n $1 | cut -d "," -f 1 | cut -d " " -f 1)
 
 # Se borra el directorio temporal en caso de que esté presente.
-rm -r $DIR_TEMPORAL 2> /dev/null
+rm -rf $DIR_TEMPORAL
 
 # Se crea un directorio temporal para guardar las imágenes.
 mkdir $DIR_TEMPORAL
@@ -43,5 +43,5 @@ echo $(sha256sum $ARCHIVO_SALIDA) > $ARCHIVO_SALIDA.sha256
 # Se borra el directorio temporal.
 rm -r $DIR_TEMPORAL
 
-echo "Imágenes generadas y comprimidas en '$ARCHIVO_SALIDA'"
+echo "Imágenes generadas y comprimidas en '$ARCHIVO_SALIDA'."
 read -p "Presione Enter para continuar..."
