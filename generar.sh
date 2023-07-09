@@ -35,13 +35,13 @@ done
 echo "Imágenes generadas. Comprimiendo..."
 
 # Se comprimen las imágenes.
-tar -C $DIR_TEMPORAL -czf $ARCHIVO_SALIDA ./
+tar -C $DIR_TEMPORAL -czf $IMAGENES ./
 
 # Se calcula la suma de verificación y se guarda en un archivo.
-echo $(sha256sum $ARCHIVO_SALIDA) > $ARCHIVO_SALIDA.sha256
+echo $(sha256sum $IMAGENES) > $IMAGENES.sha256
 
 # Se borra el directorio temporal.
 rm -r $DIR_TEMPORAL
 
-echo "Imágenes generadas y comprimidas en '$ARCHIVO_SALIDA'."
-read -p "Presione Enter para continuar..."
+echo "Imágenes generadas y comprimidas."
+read -p "Presione Enter para volver al menú."
