@@ -27,8 +27,8 @@ opciones() {
         main
     ;;
     3)
-        ./descomprimir.sh
-        ./procesar.sh
+        ./descomprimir.sh || main
+        ./procesar.sh || main
         ./comprimir.sh
         main
     ;;
