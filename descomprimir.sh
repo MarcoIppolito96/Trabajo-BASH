@@ -14,20 +14,18 @@ rm -rf $DIR_TEMPORAL
 # Se crea un directorio temporal para guardar las imágenes.
 mkdir $DIR_TEMPORAL
 
-# Se descomprimen las imágenes.
-7zz x $IMAGENES -o$DIR_TEMPORAL > /dev/null
+# Se intenta descomprimir el archivo asumiendo que es un tar comprimido.
+7zz x -so $IMAGENES 2> /dev/null | tar -C $DIR_TEMPORAL -xf - 2> /dev/null ||
 
-if [[ $? != 0 ]]; then
+# Si lo anterior falla, se intenta descomprimirlo como un archivo comprimido
+# con otro formato de compresión.
+7zz x $IMAGENES -o$DIR_TEMPORAL &> /dev/null ||
+
+# Si todo lo anterior falla, se vuelve al menú. 
+{
     echo "El archivo no se pudo descomprimir."
     read -p "Presione Enter para volver al menú."
-    exit 1
-fi
-
-# Si el archivo generado/descargado es un .tar.gz, 7-zip sólo extraerá el
-# contenido del archivo .gz, por lo que habrá que extraer también el archivo
-# .tar que contiene.
-if [[ -f "$DIR_TEMPORAL/$IMAGENES~" ]]; then
-    7zz x $DIR_TEMPORAL/$IMAGENES~ -o$DIR_TEMPORAL > /dev/null
-fi
+    exit 2
+}
 
 echo "Imágenes descomprimidas."
