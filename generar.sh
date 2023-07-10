@@ -12,7 +12,7 @@ ARCHIVO_NOMBRES="nombres.csv"
 LINK="https://thispersondoesnotexist.com/"
 
 # Se determina el formato de las imágenes a descargar.
-FORMATO=$(wget --spider $LINK 2>&1 | grep Length: | tr -s "[:punct:]" " " | cut -d " " -f 5)
+FORMATO=$(wget --spider $LINK 2>&1 | grep -E "^Length:.*\[image/" | tr -s "[:punct:]" " " | cut -d " " -f 5)
 
 # Se crea una lista de nombres aleatorios a partir de el archivo CSV provisto.
 NOMBRES=$(sort -R $ARCHIVO_NOMBRES | head -n $1 | cut -d "," -f 1 | cut -d " " -f 1)
@@ -24,11 +24,11 @@ rm -rf $DIR_TEMPORAL
 mkdir $DIR_TEMPORAL
 
 # Se descargan las imágenes, asignándoseles un nombre de la lista de nombres.
-CONT=0
+CONT=1
 for NOMBRE in $NOMBRES; do
-	wget -O "$DIR_TEMPORAL/$NOMBRE.$FORMATO" $LINK 2> /dev/null
-	CONT=$((CONT + 1))
 	echo "Generando imágenes... ($CONT/$1)"
+	wget -O "$DIR_TEMPORAL/$NOMBRE.$FORMATO" $LINK 2> /dev/null
+	CONT=$(($CONT + 1))
 	sleep 1
 done
 
