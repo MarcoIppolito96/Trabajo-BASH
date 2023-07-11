@@ -10,8 +10,16 @@ imprimir_menu() {
     echo ""
 }
 
-opciones() {
-    case $1 in
+main() {
+    imprimir_menu
+
+    read -p "Ingrese una opción: " OPCION
+    while ! [[ $OPCION =~ ^[0-3]$ ]]; do
+        imprimir_menu
+        read -p "Opción incorrecta. Intente nuevamente: " OPCION
+    done
+
+    case $OPCION in
     1)
         clear
         read -p "Ingrese la cantidad de imágenes a generar. Ingrese 0 para volver al menú: " CANT
@@ -36,20 +44,6 @@ opciones() {
         exit 0
     ;;
     esac
-}
-
-leer_opcion() {
-    read -p "Ingrese una opción: " OPCION
-    while ! [[ $OPCION =~ ^[0-3]$ ]]; do
-        imprimir_menu
-        read -p "Opción incorrecta. Intente nuevamente: " OPCION
-    done
-    opciones $OPCION
-}
-
-main() {
-    imprimir_menu
-    leer_opcion
 }
 
 main
