@@ -1,18 +1,25 @@
 #!/bin/bash
 clear
 
-# Se comprueba que se haya pasado sólo un argumento
-# y que dicho argumento sea un número mayor a 1.
+# Se comprueba que se haya pasado sólo un argumento y que dicho argumento sea
+# un número mayor a 1.
 if [[ $# != 1 ]] || [[ $1 < 1 ]]; then
 	exit 1
 fi
 
 # Constantes
-ARCHIVO_NOMBRES="nombres.csv"
-LINK="https://thispersondoesnotexist.com/"
+ARCHIVO_NOMBRES="$DIR_RAIZ/nombres.csv"
+LINK_NOMBRES="https://raw.githubusercontent.com/adalessandro/EdP-2023-TP-Final/main/dict.csv"
+LINK_IMAGENES="https://thispersondoesnotexist.com/"
+
+# Se descarga el archivo CSV con los nombres en caso de no estar presente.
+if ! [[ -f $ARCHIVO_NOMBRES ]]; then
+	echo "El archivo con los nombres no se encuentra presente. Descargando..."
+	wget -O $ARCHIVO_NOMBRES $LINK_NOMBRES 2> /dev/null
+fi
 
 # Se determina el formato de las imágenes a descargar.
-FORMATO=$(wget --spider $LINK 2>&1 | grep -E "^Length:.*\[image/" | tr -s "[:punct:]" " " | cut -d " " -f 5)
+FORMATO=$(wget --spider $LINK_IMAGENES 2>&1 | grep -E "^Length:.*\[image/" | tr -s "[:punct:]" " " | cut -d " " -f 5)
 
 # Se crea una lista de nombres aleatorios a partir de el archivo CSV provisto.
 NOMBRES=$(sort -R $ARCHIVO_NOMBRES | head -n $1 | cut -d "," -f 1 | cut -d " " -f 1)
@@ -27,7 +34,7 @@ mkdir $DIR_TEMPORAL
 CONT=1
 for NOMBRE in $NOMBRES; do
 	echo "Generando imágenes... ($CONT/$1)"
-	wget -O "$DIR_TEMPORAL/$NOMBRE.$FORMATO" $LINK 2> /dev/null
+	wget -O "$DIR_TEMPORAL/$NOMBRE.$FORMATO" $LINK_IMAGENES 2> /dev/null
 	CONT=$(($CONT + 1))
 	sleep 1
 done
