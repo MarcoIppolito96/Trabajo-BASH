@@ -7,17 +7,17 @@ RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
 # Variables de entorno.
-ENV DIR_PROCESADOR "/opt/procesador"
-ENV DIR_TEMPORAL ".tmp"
-ENV IMAGENES="imagenes"
-ENV DIR_SALIDA="$DIR_PROCESADOR/salida"
+ENV DIR_RAIZ "/opt/procesador"
+ENV DIR_TEMPORAL "$DIR_RAIZ/.tmp"
+ENV IMAGENES="$DIR_RAIZ/imagenes"
+ENV DIR_SALIDA="$DIR_RAIZ/salida"
 
 # Se crea un directorio en el cual se copiarán los archivos necesarios.
-RUN mkdir $DIR_PROCESADOR
-WORKDIR $DIR_PROCESADOR
+RUN mkdir $DIR_RAIZ
+WORKDIR $DIR_RAIZ
 #COPY ./ ./
 
 # Se monta el directorio de salida.
-VOLUME $DIR_PROCESADOR
-#VOLUME $DIR_PROCESADOR/salida
+VOLUME $DIR_RAIZ
+#VOLUME $DIR_RAIZ/salida
 #CMD [ "bash", "menu.sh" ]
