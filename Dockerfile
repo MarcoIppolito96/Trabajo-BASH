@@ -10,6 +10,7 @@ RUN rm -rf /var/lib/apt/lists/*
 ENV DIR_RAIZ "/opt/procesador"
 ENV DIR_TEMPORAL "$DIR_RAIZ/.tmp"
 ENV IMAGENES="$DIR_RAIZ/imagenes"
+ENV SUMA="$IMAGENES.sha256"
 ENV DIR_SALIDA="$DIR_RAIZ/salida"
 
 # Se crea un directorio en el cual se copiarán los archivos necesarios.
