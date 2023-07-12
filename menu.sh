@@ -58,7 +58,7 @@ main() {
         read -p "Ingrese el link de la suma de verificación. Ingrese 0 para volver al menú: " LINK_SUMA
         comprobar_link $LINK_SUMA
 
-        ./descargar.sh
+        ./descargar.sh $LINK_IMAGENES $LINK_SUMA
         main
     ;;
     3)
