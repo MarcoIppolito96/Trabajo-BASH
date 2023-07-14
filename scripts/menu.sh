@@ -5,12 +5,13 @@ source link_valido.sh
 # no funciona, vuelve a pedirlo hasta que el link ingresado funcione
 # correctamente o hasta que se ingrese '0' para volver al menú.
 comprobar_link() {
-    while ! link_valido $1 && [[ $1 != 0 ]]; do
+    LINK=$1
+    while ! link_valido $LINK && [[ $LINK != 0 ]]; do
         clear
-        read -p "El link ingresado no es válido o no funciona. Intente nuevamente: "
+        read -p "El link ingresado no es válido o no funciona. Intente nuevamente o ingrese '0' para volver al menú: " LINK
     done
     
-    if [[ $1 == 0 ]]; then
+    if [[ $LINK == 0 ]]; then
         main
     fi
 }
@@ -41,10 +42,10 @@ main() {
     1)
         clear
 
-        read -p "Ingrese la cantidad de imágenes a generar. Ingrese 0 para volver al menú: " CANT
+        read -p "Ingrese la cantidad de imágenes a generar. Ingrese '0' para volver al menú: " CANT
         while ! [[ $CANT =~ ^[0-9]+$ ]]; do
             clear
-            read -p "Cantidad incorrecta, intente nuevamente. Ingrese 0 para volver al menú: " CANT
+            read -p "Cantidad incorrecta, intente nuevamente. Ingrese '0' para volver al menú: " CANT
         done
 
         ./generar.sh $CANT
@@ -52,10 +53,11 @@ main() {
     ;;
     2)
         clear
-        read -p "Ingrese el link del archivo comprimido a descargar. Ingrese 0 para volver al menú: " LINK_IMAGENES
+        read -p "Ingrese el link del archivo comprimido a descargar. Ingrese '0' para volver al menú: " LINK_IMAGENES
         comprobar_link $LINK_IMAGENES
 
-        read -p "Ingrese el link de la suma de verificación. Ingrese 0 para volver al menú: " LINK_SUMA
+        clear
+        read -p "Ingrese el link de la suma de verificación. Ingrese '0' para volver al menú: " LINK_SUMA
         comprobar_link $LINK_SUMA
 
         ./descargar.sh $LINK_IMAGENES $LINK_SUMA
