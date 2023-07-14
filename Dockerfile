@@ -13,12 +13,17 @@ ENV IMAGENES="$DIR_RAIZ/imagenes"
 ENV SUMA="$IMAGENES.sha256"
 ENV DIR_SALIDA="$DIR_RAIZ/salida"
 
-# Se crea un directorio en el cual se copiarán los archivos necesarios.
+# Se crea un directorio en el cual se copiarán los scripts necesarios.
 RUN mkdir $DIR_RAIZ
+
+# Se establece el directorio creado como directorio de trabajo.
 WORKDIR $DIR_RAIZ
-#COPY ./ ./
+
+# Se copian los scripts.
+COPY scripts ./
 
 # Se monta el directorio de salida.
-VOLUME $DIR_RAIZ
-#VOLUME $DIR_RAIZ/salida
-#CMD [ "bash", "menu.sh" ]
+VOLUME $DIR_RAIZ/salida
+
+# Se ejecuta el menú.
+CMD [ "bash", "menu.sh" ]
