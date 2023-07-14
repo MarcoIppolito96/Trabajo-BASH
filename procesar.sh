@@ -9,7 +9,7 @@ fi
 
 # Se crea una lista con los nombres de archivos válidos (comienzan con
 # mayúscula y continúan con minúscula).
-VALIDOS=$(ls $DIR_TEMPORAL | grep -E ^[[:upper:]][[:lower:]]+\.?[[:alpha:]]+$)
+VALIDOS=$(ls $DIR_TEMPORAL | grep -E ^[[:upper:]][[:lower:]]+\.?[[:alpha:]]+?$)
 CANT=$(echo $VALIDOS | wc -w)
 
 # Se procesan las imágenes con nombres válidos.
@@ -20,4 +20,4 @@ for NOMBRE in $VALIDOS; do
     CONT=$(($CONT + 1))
 done
 
-echo "Imágenes procesadas."
+echo "Las imágenes fueron procesadas."

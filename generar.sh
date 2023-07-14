@@ -33,7 +33,7 @@ if ! [[ -f $ARCHIVO_NOMBRES ]]; then
 fi
 
 # Se determina el formato de las imágenes a descargar.
-FORMATO=$(wget --spider $LINK_IMAGENES 2>&1 | grep -E "^Length:.*\[image/" |
+FORMATO=$(wget --spider $LINK_IMAGENES 2>&1 | grep -E ^Length:.*\[image/ |
 tr -s "[:punct:]" " " | cut -d " " -f 5)
 
 # Se crea una lista de nombres aleatorios a partir de el archivo CSV provisto.
@@ -66,5 +66,5 @@ echo $(sha256sum $IMAGENES) > $SUMA
 # Se borra el directorio temporal.
 rm -r $DIR_TEMPORAL
 
-echo "Imágenes generadas y comprimidas exitosamente."
+echo "Las imágenes fueron generadas y comprimidas exitosamente."
 read -p "Presione Enter para volver al menú."
