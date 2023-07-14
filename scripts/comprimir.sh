@@ -33,6 +33,8 @@ done
 # Se escribe la cantidad de nombres que terminan con 'a'.
 echo $CONT > "$DIR_TEMPORAL/terminan_con_a.txt"
 
+echo "Comprimiendo las imágenes..."
+
 # Se comprimen todos los archivos generados y todas las imágenes en el
 # directorio de salida, el cual es accesible fuera del contenedor.
 tar -C $DIR_TEMPORAL -czf "$DIR_SALIDA/salida.tar.gz" ./
