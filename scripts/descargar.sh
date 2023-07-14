@@ -8,11 +8,11 @@ fi
 
 echo "Descargando el archivo con las imágenes..."
 
-wget -O $IMAGENES $1 2> /dev/null
+wget -O $IMAGENES $1 -q --show-progress
 
 echo "Descargando el archivo con la suma de verificación..." 
 
-wget -O $SUMA $2 2> /dev/null
+wget -O $SUMA $2 -q --show-progress
 
 # Se cambia el nombre del archivo que contiene las imágenes dentro del archivo
 # que contiene la suma de verificación por si el archivo original tiene un

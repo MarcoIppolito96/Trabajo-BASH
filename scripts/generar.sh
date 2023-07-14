@@ -29,7 +29,7 @@ comprobar_link $LINK_IMAGENES
 if ! [[ -f $ARCHIVO_NOMBRES ]]; then
 	echo "El archivo con los nombres no se encuentra presente. Descargando..."
 	comprobar_link $LINK_NOMBRES
-	wget -O $ARCHIVO_NOMBRES $LINK_NOMBRES 2> /dev/null
+	wget -O $ARCHIVO_NOMBRES $LINK_NOMBRES -q --show-progress
 fi
 
 # Se determina el formato de las imágenes a descargar.
@@ -47,11 +47,9 @@ rm -rf $DIR_TEMPORAL
 mkdir $DIR_TEMPORAL
 
 # Se descargan las imágenes, asignándoseles un nombre de la lista de nombres.
-CONT=1
+echo "Generando imágenes..."
 for NOMBRE in $NOMBRES; do
-	echo "Generando imágenes... ($CONT/$1)"
-	wget -O "$DIR_TEMPORAL/$NOMBRE.$FORMATO" $LINK_IMAGENES 2> /dev/null
-	CONT=$(($CONT + 1))
+	wget -O "$DIR_TEMPORAL/$NOMBRE.$FORMATO" $LINK_IMAGENES -q --show-progress
 	sleep 1
 done
 
