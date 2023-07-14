@@ -8,11 +8,11 @@ fi
 
 echo "Descargando el archivo con las imágenes..."
 
-#wget -O $IMAGENES $1 2> /dev/null
+wget -O $IMAGENES $1 2> /dev/null
 
 echo "Descargando el archivo con la suma de verificación..." 
 
-#wget -O $SUMA $2 2> /dev/null
+wget -O $SUMA $2 2> /dev/null
 
 # Se cambia el nombre del archivo que contiene las imágenes dentro del archivo
 # que contiene la suma de verificación por si el archivo original tiene un
@@ -31,5 +31,5 @@ sha256sum --check $SUMA &> /dev/null ||
 	exit 2
 }
 
-echo "Archivo descargado y comprobado exitosamente."
+echo "El archivo fue descargado y comprobado exitosamente."
 read -p "Presione Enter para volver al menú."
