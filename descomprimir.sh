@@ -28,4 +28,4 @@ mkdir $DIR_TEMPORAL
     exit 2
 }
 
-echo "Imágenes descomprimidas."
+echo "Las imágenes fueron descomprimidas exitosamente."
