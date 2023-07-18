@@ -20,7 +20,7 @@ RUN mkdir $DIR_RAIZ
 WORKDIR $DIR_RAIZ
 
 # Se copian los scripts.
-COPY scripts ./
+COPY --chmod=0777 scripts ./
 
 # Se monta el directorio de salida.
 VOLUME $DIR_RAIZ/salida
